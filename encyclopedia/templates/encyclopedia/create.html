@@ -1,0 +1,30 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {% if edit %}
+        Editing {{ title }}
+    {% else %}
+        Create New Page
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+
+    {% if edit %}
+        <h1>Editing {{ entryTitle }}</h1>
+    {% else %}
+        <h1>Create New Page</h1>
+    {% endif %}
+    
+    {% if existing %}
+        <div class="alert alert-danger" role="alert">
+            The page title you chose already exists!
+        </div>
+    {% endif %}
+    <form action="{% url 'create' %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type = submit>
+    </form>
+
+{% endblock %}
